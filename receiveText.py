@@ -7,7 +7,7 @@ app = Flask(__name__)
 def respond_to_call():
 	print("got something")
 	resp = twilio.twiml.Response()
-	resp.message("Hi Matt")
+	resp.message("What did you say to me little bitch?")
 	return str(resp)
 
 if __name__ == "__main__":
