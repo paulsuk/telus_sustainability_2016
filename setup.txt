@@ -1,0 +1,33 @@
+To run this server:
+
+pip install:
+Heroku
+Flask
+Python
+Twilio
+
+
+Write your script
+In the procfile, replace "receiveText" with the name of the Flask script you want to run
+
+in terminal/cmd:
+
+	heroku login (and login using a free heroku account)
+	heroku create
+	git add *
+	git commit -m "your message here"
+	git push heroku master
+
+	// To start an instance of your application
+	heroku ps:scale web=1
+
+
+After you push to heroku, you will get a link like "https://polar-oasis-25414.herokuapp.com/" where the application will be live.
+
+Go to twilio, sign into this account:
+	pauls960604@gmail.com
+	PAULrocks1
+
+Go to my numbers, click on then number, and change the URL of the messaging endpoint to your link above
+
+and we gucci mane
