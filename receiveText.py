@@ -14,6 +14,8 @@ CERT_PATH = "certificates/TELUS-TELUS_UofT_01.crt"
 KEY_PATH = "certificates/TELUS-TELUS_UofT_01.key"
 NUMBER = "16042199584"
 CITY_TO_CONTACT = {}
+DSN = 'https://telushackathon1.firebaseio.com/'
+database = firebase.FirebaseApplication(DSN)
 
 @app.route("/", methods=['GET', 'POST'])
 
@@ -23,7 +25,7 @@ def respond_to_call():
 
 	# resp = "excessive litter @ College and Spadina"
 
-	resp_list = resp.split('@' ,1])
+	resp_list = resp.split('@' ,1)
 	issue = resp_list[0]
 	location = resp_list[1]
 
@@ -88,6 +90,8 @@ def get_location_telus(number):
 	else:
 		return get_city(longitude, latitude)
 
+	return "toronto"
+
 def send_message_telus(number, message):
 
 	body = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
@@ -128,16 +132,12 @@ def get_city(lat, long):
     		return resp.results[0].address_components[0].long_name
 	else:
 		return 'error'
-    
-    	#Documentation: https://developers.google.com/maps/documentation/geocoding/start
-    	# github python client if we need it: https://github.com/googlemaps/google-maps-services-python
 
 def send_to_db(city, issue, location):
-	print city, issue, location
-	# from firebase import firebase
-	# firebase = firebase.FirebaseApplication('https://telushackathon.firebaseio.com/', None)
-	# result = firebase.post('/ticket', city)
-
+	cityURL = '/cities/%s' %city
+	result = database.post(cityURL, {"issue": issue, "location": location})
+	print result
 
 if __name__ == "__main__":
+	#send_to_db("toronto","garbage","in a place")
 	app.run(debug=True)
