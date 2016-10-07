@@ -46,7 +46,7 @@ of your issue followed by an @ sign, then the
 relevant address
 Ex: 'excessive litter @College and Spadina' """
 
-	send_message_telus(NUMBER, reply)
+	#send_message_telus(NUMBER, reply)
 
 	resp.message(reply)
 	return str(resp)
