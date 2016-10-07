@@ -23,11 +23,15 @@ def respond_to_call():
 
 	# resp = "excessive litter @ College and Spadina"
 
-	latRex = re.compile(r'([^@]*?)@([^@]*?)',re.S|re.M)
-	match = latRex.match(str(resp))
-	if match:
-		issue = match.groups()[0].strip()
-		location = match.groups()[1].strip()
+	resp_list = resp.split('@' ,1])
+	issue = resp_list[0]
+	location = resp_list[1]
+
+	#latRex = re.compile(r'([^@]*?)@([^@]*?)',re.S|re.M)
+	#match = latRex.match(str(resp))
+	#if match:
+	#	issue = match.groups()[0].strip()
+	#	location = match.groups()[1].strip()
 
 	city = get_location_telus(NUMBER)
 	send_to_db(city, issue, location)
@@ -114,7 +118,19 @@ def send_message_telus(number, message):
 			)
 
 def get_city(lat, long):
-	return "Toronto"
+	# initial url with API key replaced:
+    	# https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=AIzaSyBAVg_8QI088vxNgXNwO7hAdpu2zVxF6lM
+    
+	city_url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + str(lat) + ',' + str(long) + '&result_type=locality&key=AIzaSyBAVg_8QI088vxNgXNwO7hAdpu2zVxF6lM'
+	resp = requests.get(city_url)
+	resp = resp.json()
+    	if resp.status == "OK":
+    		return resp.results[0].address_components[0].long_name
+	else:
+		return 'error'
+    
+    	#Documentation: https://developers.google.com/maps/documentation/geocoding/start
+    	# github python client if we need it: https://github.com/googlemaps/google-maps-services-python
 
 def send_to_db(city, issue, location):
 	print city, issue, location
