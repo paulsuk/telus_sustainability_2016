@@ -23,8 +23,6 @@ def respond_to_call():
 
 	resp = twilio.twiml.Response()
 
-	# resp = "excessive litter @ College and Spadina"
-
 	resp_list = resp.split('@' ,1)
 	issue = resp_list[0]
 	location = resp_list[1]
@@ -38,13 +36,7 @@ def respond_to_call():
 	city = get_location_telus(NUMBER)
 	send_to_db(city, issue, location)
 
-	reply = """Thank you for using CityInformer!
-Your message will be passed along
-to the city of """ + city + """. Please
-don't forget to send a description
-of your issue followed by an @ sign, then the
-relevant address
-Ex: 'excessive litter @College and Spadina' """
+	reply = "Thank you for using CityInformer! Your message will be passed along to the city of " + city + . Please don't forget to send a description of your issue followed by an @ sign, then the relevant address Ex: \'excessive litter @College and Spadina\'"
 
 	#send_message_telus(NUMBER, reply)
 
