@@ -20,18 +20,11 @@ database = firebase.FirebaseApplication(DSN)
 @app.route("/", methods=['GET', 'POST'])
 
 def respond_to_call():
-
 	resp = twilio.twiml.Response()
 
 	resp_list = resp.split('@' ,1)
 	issue = resp_list[0]
 	location = resp_list[1]
-
-	latRex = re.compile(r'([^@]*?)@([^@]*?)',re.S|re.M)
-	match = latRex.match(str(resp))
-	if match:
-		issue = match.groups()[0].strip()
-		location = match.groups()[1].strip()
 
 	city = get_location_telus(NUMBER)
 	send_to_db(city, issue, location)
