@@ -21,6 +21,7 @@ database = firebase.FirebaseApplication(DSN)
 
 def respond_to_call():
 	resp = twilio.twiml.Response()
+	send_message_telus(Number, "hi")
 
 	resp_list = resp.split('@' ,1)
 	issue = resp_list[0]
