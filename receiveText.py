@@ -25,7 +25,8 @@ def respond_to_call():
 
 	resp_list = resp.split('@' ,1)
 	issue = resp_list[0]
-	location = resp_list[1]
+	if len(resp_list) > 1:
+		location = resp_list[1]
 
 	city = get_location_telus(NUMBER)
 	send_to_db(city, issue, location)
