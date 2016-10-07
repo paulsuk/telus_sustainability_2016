@@ -30,10 +30,8 @@ def respond_to_call():
 	send_to_db(city, issue, location)
 
 	reply = "Thank you for using CityInformer! Your message will be passed along to the city of " + city + . Please don't forget to send a description of your issue followed by an @ sign, then the relevant address Ex: \'excessive litter @College and Spadina\'"
-
-	#send_message_telus(NUMBER, reply)
-
-	resp.message(reply)
+	send_message_telus(NUMBER, reply)
+	#resp.message(reply)
 	return str(resp)
 
 def get_location_telus(number):
