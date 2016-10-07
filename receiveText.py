@@ -27,6 +27,8 @@ def respond_to_call():
 	issue = resp_list[0]
 	if len(resp_list) > 1:
 		location = resp_list[1]
+	else:
+		location = "unknown"
 
 	city = get_location_telus(NUMBER)
 	send_to_db(city, issue, location)
