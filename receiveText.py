@@ -48,9 +48,8 @@ Ex: 'excessive litter @College and Spadina' """
 
 	send_message_telus(NUMBER, reply)
 
-	#
-	# resp.message(reply)
-	# return str(resp)
+	resp.message(reply)
+	return str(resp)
 
 def get_location_telus(number):
 
